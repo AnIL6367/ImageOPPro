@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AnIL Naam To Suna Hi Hoga</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+text-align:center;
+}
+
+/* TITLE */
+
+.title{
+font-size:50px;
+margin-top:30px;
+}
+
+/* MENU SMALL */
+
+.menu{
+margin-top:20px;
+}
+
+.menu button{
+padding:8px 15px;
+margin:5px;
+border:none;
+border-radius:20px;
+background:#00c6ff;
+color:white;
+cursor:pointer;
+}
+
+/* CONTENT */
+
+.section{
+display:none;
+margin-top:20px;
+}
+
+.active{
+display:block;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:40px;
+padding:20px;
+}
+
+/* GODZILLA IMAGE */
+
+.godzilla img{
+width:320px;
+border-radius:20px;
+box-shadow:0 0 20px black;
+}
+
+/* CLOCK */
+
+.clock{
+width:220px;
+height:220px;
+border:6px solid white;
+border-radius:50%;
+position:relative;
+}
+
+.hand{
+position:absolute;
+background:white;
+top:50%;
+left:50%;
+transform-origin:left;
+}
+
+.hour{width:60px;height:4px;}
+.minute{width:80px;height:3px;}
+.second{width:100px;height:2px;background:red;}
+
+.text{
+position:absolute;
+font-size:11px;
+width:80px;
+text-align:center;
+}
+
+.t12{top:5px;left:70px;}
+.t3{right:-10px;top:100px;}
+.t6{bottom:5px;left:70px;}
+.t9{left:-10px;top:100px;}
+
+</style>
+</head>
+
+<body>
+
+<div class="title">
+AnIL Naam To Suna Hi Hoga 
+</div>
+
+<!-- SMALL MENU -->
+
+<div class="menu">
+
+<button onclick="show('about')">About</button>
+<button onclick="show('skills')">Skills</button>
+<button onclick="show('projects')">Projects</button>
+<button onclick="show('contact')">Contact</button>
+
+</div>
+
+<!-- CONTENT -->
+
+<div id="about" class="section active">
+<p>do you know </p>
+</div>
+
+<div id="skills" class="section">
+<p>HTML • CSS • JavaScript  pythan</p>
+<p> destroying the world</p>
+<P> sQL</P>
+</div>
+
+<div id="projects" class="section">
+<p>My godzilla </p>
+</div>
+
+<div id="contact" class="section">
+<p>Email: marvalmonu3@gmail.com</p>
+</div>
+
+<!-- GODZILLA + CLOCK -->
+
+<div class="container">
+
+<div class="clock">
+
+<div class="hand hour"></div>
+<div class="hand minute"></div>
+<div class="hand second"></div>
+
+<div class="text t12">YOUR TIME IS AND </div>
+<div class="text t3">WHY ARE YOU FIND ME </div>
+<div class="text t6">DONT Waste OF MY TIME</div>
+<div class="text t9">DO YOU NO WHO I AM </div>
+
+</div>
+
+<div class="godzilla">
+
+<img src="https://4kwallpapers.com/images/walls/thumbs_3t/18099.jpg">
+
+</div>
+
+</div>
+
+<script>
+
+function show(id){
+
+document.querySelectorAll(".section").forEach(s=>{
+s.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+}
+
+/* CLOCK */
+
+function updateClock(){
+
+const now = new Date();
+
+const sec = now.getSeconds()*6;
+const min = now.getMinutes()*6;
+const hr = now.getHours()*30 + min/12;
+
+document.querySelector(".second").style.transform=`rotate(${sec}deg)`;
+document.querySelector(".minute").style.transform=`rotate(${min}deg)`;
+document.querySelector(".hour").style.transform=`rotate(${hr}deg)`;
+
+}
+
+setInterval(updateClock,1000);
+
+</script>
+
+</body>
+</html>
