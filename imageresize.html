@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Smart Tools</title>
+
+<style>
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+text-align:center;
+}
+
+.box{
+background:white;
+color:black;
+width:300px;
+margin:20px auto;
+padding:20px;
+border-radius:10px;
+}
+
+input,button{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
+
+a{
+display:none;
+margin-top:10px;
+background:green;
+color:white;
+padding:10px;
+text-decoration:none;
+border-radius:8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>⚡ Smart Tools</h2>
+
+<!-- UPLOAD -->
+<div class="box">
+<h3>📤 Upload File</h3>
+<input type="file" id="file">
+<button onclick="upload()">Upload</button>
+<a id="link">Download</a>
+</div>
+
+<!-- RESIZE -->
+<div class="box">
+<h3>📏 Image Resize</h3>
+<input type="file" id="img">
+<input type="number" id="w" placeholder="Width">
+<input type="number" id="h" placeholder="Height">
+<button onclick="resize()">Resize</button>
+<a id="imgLink">Download Image</a>
+</div>
+
+<script>
+
+/* UPLOAD */
+async function upload(){
+let file=document.getElementById("file").files[0];
+
+let form=new FormData();
+form.append("file",file);
+
+let res=await fetch("http://localhost:3000/upload",{
+method:"POST",
+body:form
+});
+
+let data=await res.json();
+
+let link=document.getElementById("link");
+link.href=data.url;
+link.innerText="⬇ Download File";
+link.style.display="block";
+}
+
+/* RESIZE */
+async function resize(){
+let file=document.getElementById("img").files[0];
+let w=document.getElementById("w").value;
+let h=document.getElementById("h").value;
+
+let form=new FormData();
+form.append("file",file);
+form.append("width",w);
+form.append("height",h);
+
+let res=await fetch("http://localhost:3000/resize",{
+method:"POST",
+body:form
+});
+
+let data=await res.json();
+
+let link=document.getElementById("imgLink");
+link.href=data.url;
+link.innerText="⬇ Download Image";
+link.style.display="block";
+}
+
+</script>
+
+</body>
+</html>
